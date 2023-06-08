@@ -1,29 +1,53 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import LoginView from '../views/LoginView.vue'
+import ManagementTaskView from '../views/ManagementTaskView.vue'
 
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'login',
+    component: LoginView
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
+    path: '/login',
+    name: 'login',
+    component: LoginView
+  },
+  {
+    path: '/management',
+    name: 'management',
+    component: ManagementTaskView
+  },
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+
+  let autenticated = false
+  let user = localStorage.getItem('user_task')
+
+  if (user !== null) {
+    autenticated = true
+  }
+
+  if (!autenticated) {
+    if (to.name !== 'login') {
+      next('/login')
+    }else{
+      next()
+    }
+  }else{
+    next()
+  }
+
 })
 
 export default router

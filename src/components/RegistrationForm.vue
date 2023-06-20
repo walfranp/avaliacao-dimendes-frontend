@@ -400,7 +400,7 @@ export default {
     },
     updateTaskSelected() {
       this.$http
-        .put("task/update/", this.taskUpdate)
+        .put("task/update/" + this.taskUpdate.id, this.taskUpdate)
         .then((response) => {
           this.getTasks();
         })

@@ -147,7 +147,7 @@
               >
                 <label for="nome">Nome:</label>
                 <input
-                  v-model="userRegister.nome"
+                  v-model="userRegister.name"
                   class="form-control form-control-sm mb-1"
                   type="text"
                   id="nome"
@@ -224,7 +224,7 @@ export default {
         password: "",
       },
       userRegister: {
-        nome: "",
+        name: "",
         email: "",
         password: "",
         confirmPassword: "",
